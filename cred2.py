@@ -4,12 +4,10 @@ def login():
     """
     username = input("Enter your username: ")
     password = input("Enter your password: ")
-
     # Replace with your actual validation logic based on a database or stored credentials
     if username == "admin" and password == "password":
         print("Login successful!")
     else:
-        print("Invalid username or password.") 
-
+        print("Invalid username or password.")
 # Example usage
 login()
