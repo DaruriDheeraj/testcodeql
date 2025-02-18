@@ -1,5 +1,5 @@
 name: "Custom CodeQL Config"
-disable-default-queries: false
+disable-default-queries: true
 queries:
   - uses: security-and-quality
-  - uses: ..github/queries/hardcoded_secrets.ql
+  - uses: .github/queries/hardcoded_secrets.ql
