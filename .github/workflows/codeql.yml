@@ -68,7 +68,7 @@ jobs:
         languages: ${{ matrix.language }}
         queries: +security-and-quality
         config-file: .github/codeql-config.yml
-        add-snippets: true
+        #add-snippets: true
         build-mode: ${{ matrix.build-mode }}
         # If you wish to specify custom queries, you can do so here or in a config file.
         # By default, queries listed here will override any specified in a config file.
@@ -97,9 +97,27 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         category: "/language:${{matrix.language}}"
+    - name: Ensure output directory exists
+      run: mkdir -p /home/runner/work/_temp/codeql_analysis/
+    - name: Run CodeQL Analysis
+      run: |
+          "/opt/hostedtoolcache/CodeQL/2.20.4/x64/codeql/codeql" database analyze /home/runner/work/_temp/codeql_databases/python \
+          --format=sarifv2.1.0 \
+          --output=/home/runner/work/_temp/codeql_analysis/results.sarif  
     - name: Upload SARIF results
       uses: actions/upload-artifact@v4
       with:
           name: codeql-results-sarif
           path: /home/runner/work/_temp/codeql_analysis/results.sarif
-
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        output: ${{ github.workspace }}/_temp/codeql_analysis/results.sarif
+    
+    - name: Check if results.sarif exists
+      run: |
+          if [ -f "${{ github.workspace }}/_temp/codeql_analysis/results.sarif" ]; then
+              echo "File exists!"
+          else
+            echo "File does not exist!"
+          fi
