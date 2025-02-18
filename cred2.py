@@ -2,7 +2,7 @@
 
 # Predefined username and password
 correct_username = "admin"
-correct_password = "password123"
+correct_password = "password124"
 
 # Function to handle login
 def login():
