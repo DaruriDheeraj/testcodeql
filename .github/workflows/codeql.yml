@@ -102,4 +102,15 @@ jobs:
       with:
           name: codeql-results-sarif
           path: /home/runner/work/_temp/codeql_analysis/results.sarif
-
+    - name: Run CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        output: ${{ github.workspace }}/_temp/codeql_analysis/results.sarif
+        
+    - name: Check if results.sarif exists
+      run: |
+          if [ -f "${{ github.workspace }}/_temp/codeql_analysis/results.sarif" ]; then
+              echo "File exists!"
+          else
+            echo "File does not exist!"
+          fi
