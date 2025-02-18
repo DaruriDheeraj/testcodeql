@@ -1,5 +1,9 @@
 name: "Custom CodeQL Config"
 disable-default-queries: true
+paths:
+  - "**/*.py"   # If your credentials are in Python files
+  - "**/*.js"   # If your credentials are in JavaScript files
+  - "**/*.env"  # Scan environment files (optional)
 queries:
   - uses: security-and-quality
   - uses: ./queries/hardcoded_secrets.ql
