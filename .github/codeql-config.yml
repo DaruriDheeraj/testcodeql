@@ -1,0 +1,4 @@
+name: "Custom CodeQL Config"
+query-filters:
+  - exclude: "codeql/javascript-queries:hardcoded-credentials"
+  - include: "codeql/secrets-queries"
